@@ -30,3 +30,12 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test --project=chromium
+
+      - name: Upload Playwright HTML report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: playwright-report/
+          retention-days: 7
+          if-no-files-found: warn
